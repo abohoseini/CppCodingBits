@@ -42,20 +42,11 @@ vector<int> twoSum(vector<int>& nums, int target)
 // Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 // Output: 7 -> 0 -> 8
 // Explanation : 342 + 465 = 807.
-
-//Definition for singly-linked list.
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
-
-ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+ListNode<int>* addTwoNumbers(ListNode<int>* l1, ListNode<int>* l2)
 {
     int carryOver = 0;
-    ListNode* sum = new ListNode(0);
-    ListNode* num = sum;
+    ListNode<int>* sum = new ListNode<int>(0);
+    ListNode<int>* num = sum;
 
     while (l1 || l2 || carryOver > 0)
     {
@@ -63,7 +54,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
         int l2Val = (l2) ? l2->val : 0;
         int sumNum = l1Val + l2Val + carryOver;
         carryOver = sumNum / 10;
-        num->next = new ListNode(sumNum % 10);
+        num->next = new ListNode<int>(sumNum % 10);
         num = num->next;
 
         if (l1)
@@ -83,13 +74,13 @@ int main()
 
     // test addTwoNumbers
     // 15 + 39 = 54
-    ListNode* firstNumber = new ListNode(5);
-    firstNumber->next = new ListNode(1);
+    ListNode<int>* firstNumber = new ListNode<int>(5);
+    firstNumber->next = new ListNode<int>(1);
 
-    ListNode* secondNumber = new ListNode(9);
-    secondNumber->next = new ListNode(3);
+    ListNode<int>* secondNumber = new ListNode<int>(9);
+    secondNumber->next = new ListNode<int>(3);
     auto result = addTwoNumbers(firstNumber, secondNumber);
-
+    Utils::PrintLinkedList(result);
     // Kepp console waiting
     int i;
     cin >> i;

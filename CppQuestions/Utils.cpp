@@ -23,14 +23,30 @@ void Utils::PrintVector(vector<T> vect)
 }
 
 template <typename T>
-void Utils::Swap(T &a, T &b)
+static void Utils::Swap(T &a, T &b)
 {
     T c = a;
     a = b;
     b = c;
 }
 
+template <typename T>
+static void Utils::PrintLinkedList(ListNode<T>* list)
+{ 
+    auto templist = list;
+    while (templist)
+    {
+        cout << templist->val;
+        if (templist->next)
+        {
+            cout << "->";
+        }
+        templist = templist->next;
+    }
+}
+
 // Explicit template instantiation
+template  void Utils::PrintLinkedList<int>(ListNode<int>*);
 template void Utils::PrintVector<int>(vector<int>);
 template void Utils::PrintVector<char>(vector<char>);
 template void Utils::Swap<int>(int &, int &);
