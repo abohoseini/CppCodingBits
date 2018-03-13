@@ -7,27 +7,27 @@ using namespace std;
 template <typename T>
 void Utils::PrintVector(vector<T> vect)
 {
-	cout << '[';
+    cout << '[';
 
-	for (unsigned int i = 0; i < vect.size() - 1; i++)
-	{
-		cout << vect[i] << ", ";
-	}
+    for (unsigned int i = 0; i < vect.size() - 1; i++)
+    {
+        cout << vect[i] << ", ";
+    }
 
-	if (vect.size() > 0)
-	{
-		cout << vect[vect.size()-1];
-	}
+    if (vect.size() > 0)
+    {
+        cout << vect[vect.size() - 1];
+    }
 
-	cout << ']' << endl;
+    cout << ']' << endl;
 }
 
 template <typename T>
 void Utils::Swap(T &a, T &b)
 {
-	T c = a;
-	a = b;
-	b = c;
+    T c = a;
+    a = b;
+    b = c;
 }
 
 // Explicit template instantiation
