@@ -46,7 +46,7 @@ static void Utils::PrintLinkedList(ListNode<T>* list)
 }
 
 // Explicit template instantiation
-template  void Utils::PrintLinkedList<int>(ListNode<int>*);
+template void Utils::PrintLinkedList<int>(ListNode<int>*);
 template void Utils::PrintVector<int>(vector<int>);
 template void Utils::PrintVector<char>(vector<char>);
 template void Utils::Swap<int>(int &, int &);

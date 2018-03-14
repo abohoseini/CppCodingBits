@@ -66,6 +66,39 @@ ListNode<int>* addTwoNumbers(ListNode<int>* l1, ListNode<int>* l2)
     return sum->next;
 }
 
+// Longest Substring Without Repeating Characters, Refrence: LeetCode.com
+// Given a string, find the length of the longest substring without repeating characters.
+// Examples:
+// Given "abcabcbb", the answer is "abc", which the length is 3.
+// Given "bbbbb", the answer is "b", with the length of 1.
+// Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+int lengthOfLongestSubstring(string s)
+{
+    int len = s.length();
+
+    if (len == 0)
+        return 0;
+
+    int i = 0, j = 0, ans = 0;
+    set<char> mySet;
+    while (i < len && j < len)
+    {
+        auto iter = mySet.find(s[j]);
+        if (iter == mySet.end())
+        {
+            mySet.insert(s[j]);
+            j++;
+            ans = max(ans, j - i);
+        }
+        else
+        {
+            mySet.erase(s[i]);
+            i++;
+        }
+    }
+    return ans;
+}
+
 int main()
 {
     // test twoSum
@@ -76,6 +109,9 @@ int main()
     // 15 + 39 = 54
     ListNode<int>* firstNumber = new ListNode<int>(5);
     firstNumber->next = new ListNode<int>(1);
+
+    // test lengthOfLongestSubstring
+    cout << "Lenth of longest substring of 'pwwkew' is: "<< lengthOfLongestSubstring("pwwkew") << endl;
 
     ListNode<int>* secondNumber = new ListNode<int>(9);
     secondNumber->next = new ListNode<int>(3);
