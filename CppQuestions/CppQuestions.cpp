@@ -217,6 +217,44 @@ bool isPalindrome(int x)
     return (x == revX || x == revX / 10);
 }
 
+// Remove Nth Node From End of List, reference: LeetCode.com
+// Given a linked list, remove the nth node from the end of list and return its head.
+//
+// For example,
+// Given linked list : 1->2->3->4->5, and n = 2.
+// After removing the second node from the end, the linked list becomes 1->2->3->5.
+//
+// Note:
+// Given n will always be valid.
+// Try to do this in one pass.
+ListNode<int>* removeNthFromEnd(ListNode<int>* head, int n)
+{
+    if (!head)
+        return NULL;
+
+    ListNode<int>* dummyHead = new ListNode<int>(0);
+    dummyHead->next = head;
+    ListNode<int>* fwd = dummyHead;
+    ListNode<int>* prv = dummyHead;
+
+    while (fwd->next && n > 0) {
+        fwd = fwd->next;
+        n--;
+    }
+
+    if (!fwd)
+        return NULL;
+
+    while (fwd->next)
+    {
+        fwd = fwd->next;
+        prv = prv->next;
+    }
+
+    prv->next = prv->next->next;
+    return dummyHead->next;
+}
+
 int main()
 {
     // test twoSum
@@ -244,8 +282,16 @@ int main()
     cout << "This is converted number for '  -000698xcd ' is: " << myAtoi("  -000698xcd ") << endl;
 
     // isPalindrome test
-    string palindromeOrNot = isPalindrome(1105011) ? "Palindrome" :"not Palindrome";
+    string palindromeOrNot = isPalindrome(1105011) ? "Palindrome" : "not Palindrome";
     cout << "Number 1105011 is: " << palindromeOrNot.c_str() << endl;
+
+    // test removeNthFromEnd
+    ListNode<int>* linkedList = new ListNode<int>(1);
+    linkedList->next = new ListNode<int>(2);
+    linkedList->next->next = new ListNode<int>(3);
+    ListNode<int>* res = removeNthFromEnd(linkedList, 2);
+    cout << "removing second elemnt from 1->2->3 results in: ";
+    Utils::PrintLinkedList(res);
 
     // Kepp console waiting
     int i;

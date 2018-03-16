@@ -79,3 +79,15 @@ Refrerence: leetCode.com
 Determine whether an integer is a palindrome.Do this without extra space.
 For example 11011 and 1221 are palindrome and 123 is not
 Refrerence: leetCode.com
+
+## Remove Nth Node From End of List
+Given a linked list, remove the nth node from the end of list and return its head.
+
+#### For example,
+Given linked list : 1->2->3->4->5, and n = 2.
+After removing the second node from the end, the linked list becomes 1->2->3->5.
+
+#### Note:
+Given n will always be valid.
+Try to do this in one pass.
+Refrerence: leetCode.com

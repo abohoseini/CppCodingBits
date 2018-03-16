@@ -33,6 +33,9 @@ static void Utils::Swap(T &a, T &b)
 template <typename T>
 static void Utils::PrintLinkedList(ListNode<T>* list)
 { 
+    if (!list)
+        cout << "NULL";
+
     auto templist = list;
     while (templist)
     {
