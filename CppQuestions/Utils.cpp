@@ -43,6 +43,7 @@ static void Utils::PrintLinkedList(ListNode<T>* list)
         }
         templist = templist->next;
     }
+    cout << endl;
 }
 
 // Explicit template instantiation

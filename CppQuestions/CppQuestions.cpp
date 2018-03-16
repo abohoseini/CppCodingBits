@@ -199,6 +199,24 @@ int myAtoi(string str)
     return  negative ? result * -1 : result;
 }
 
+// Palindrome Number, reference: LeetCode.com
+// Determine whether an integer is a palindrome.Do this without extra space.
+// For example 11011 and 1221 are palindrome and 123 is not
+bool isPalindrome(int x)
+{
+    if (x < 0 || (x % 10 == 0 && x != 0))
+        return false;
+
+    int revX = 0;
+
+    while (x > revX)
+    {
+        revX = (revX * 10) + (x % 10);
+        x /= 10;
+    }
+    return (x == revX || x == revX / 10);
+}
+
 int main()
 {
     // test twoSum
@@ -220,10 +238,14 @@ int main()
     Utils::PrintLinkedList(result);
 
     // test Reverse Integer
-    cout << "revrse of -234 is: " << reverse(-234);
+    cout << "revrse of -234 is: " << reverse(-234) << endl;
 
     // String to integer (atoi) test
-    cout << "This is converted number for '  -000698xcd ' " << myAtoi("  -000698xcd ");
+    cout << "This is converted number for '  -000698xcd ' is: " << myAtoi("  -000698xcd ") << endl;
+
+    // isPalindrome test
+    string palindromeOrNot = isPalindrome(1105011) ? "Palindrome" :"not Palindrome";
+    cout << "Number 1105011 is: " << palindromeOrNot.c_str() << endl;
 
     // Kepp console waiting
     int i;
