@@ -285,37 +285,63 @@ bool isValidParentheses(string s)
     return  myStack.empty();
 }
 
+// Merge Two Sorted Lists, reference: LeetCode.com
+// Merge two sorted linked lists and return it as a new list. The new list should be made by
+// splicing together the nodes of the first two lists.
+ListNode<int>* MergeTwoLists(ListNode<int>* l1, ListNode<int>* l2)
+{
+    ListNode<int>* dummyHead = new ListNode<int>(0);
+    ListNode<int>* head = dummyHead;
+
+    while (l1 && l2)
+    {
+        if (l1->val < l2->val)
+        {
+            head->next = l1;
+            l1 = l1->next;
+        }
+        else
+        {
+            head->next = l2;
+            l2 = l2->next;
+        }
+        head = head->next;
+    }
+    head->next = (l1) ? l1 : l2;
+    return dummyHead->next;
+}
+
 int main()
 {
-    // test twoSum
+    // Test twoSum
     vector<int> nums = { 2, 7, 11, 15 };
+    cout << "Sum of following two indices which is9 : ";
     Utils::PrintVector(twoSum(nums, 9));
 
-    // test addTwoNumbers
+    // Test addTwoNumbers
     // 15 + 39 = 54
     ListNode<int>* firstNumber = new ListNode<int>(5);
     firstNumber->next = new ListNode<int>(1);
-
-    // test lengthOfLongestSubstring
-    cout << "Lenth of longest substring of 'pwwkew' is: " << lengthOfLongestSubstring("pwwkew") << endl;
-
-    // test addTwoNumbers
     ListNode<int>* secondNumber = new ListNode<int>(9);
     secondNumber->next = new ListNode<int>(3);
     auto result = addTwoNumbers(firstNumber, secondNumber);
+    cout << "15 + 39  stored in reverse order in linkedlist is: ";
     Utils::PrintLinkedList(result);
 
-    // test Reverse Integer
+    // Test lengthOfLongestSubstring
+    cout << "Lenth of longest substring of 'pwwkew' is: " << lengthOfLongestSubstring("pwwkew") << endl;
+
+    // Test Reverse Integer
     cout << "revrse of -234 is: " << reverse(-234) << endl;
 
     // String to integer (atoi) test
     cout << "This is converted number for '  -000698xcd ' is: " << myAtoi("  -000698xcd ") << endl;
 
-    // isPalindrome test
+    // TestisPalindrome
     string palindromeOrNot = isPalindrome(1105011) ? "Palindrome" : "not Palindrome";
     cout << "Number 1105011 is: " << palindromeOrNot.c_str() << endl;
 
-    // test removeNthFromEnd
+    // Test removeNthFromEnd
     ListNode<int>* linkedList = new ListNode<int>(1);
     linkedList->next = new ListNode<int>(2);
     linkedList->next->next = new ListNode<int>(3);
@@ -323,9 +349,20 @@ int main()
     cout << "removing second elemnt from 1->2->3 results in: ";
     Utils::PrintLinkedList(res);
 
-    // test isValidParentheses
+    // Test isValidParentheses
     cout << "()[]{} is: ";
-    isValidParentheses("()[]{}") ? cout << "valid parantheses approved" : cout << "not valid parantheses approved";
+    if (isValidParentheses("()[]{}"))
+        cout << "valid parantheses approved" << endl;
+    else
+        cout << "not valid parantheses approved" << endl;
+
+    // Test MergeTwoLists
+    ListNode<int>* firstList = new ListNode<int>(1);
+    firstList->next = new ListNode<int>(3);
+    ListNode<int>* secondList = new ListNode<int>(2);
+    secondList->next = new ListNode<int>(4);
+    cout << "merged sorted list of 1->3 and 2->4 is: ";
+    Utils::PrintLinkedList(MergeTwoLists(firstList,secondList));
 
     // Kepp console waiting
     int i;

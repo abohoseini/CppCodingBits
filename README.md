@@ -92,7 +92,12 @@ Given n will always be valid.
 Try to do this in one pass.
 Refrerence: leetCode.com
 
-#### Valid Parentheses
+## Valid Parentheses
 Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+Refrerence: leetCode.com
+
+## Merge Two Sorted Lists
+Merge two sorted linked lists and return it as a new list. The new list should be made by
+splicing together the nodes of the first two lists.
 Refrerence: leetCode.com
