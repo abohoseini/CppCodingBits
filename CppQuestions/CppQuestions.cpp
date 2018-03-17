@@ -255,6 +255,36 @@ ListNode<int>* removeNthFromEnd(ListNode<int>* head, int n)
     return dummyHead->next;
 }
 
+// Valid Parentheses, reference: LeetCode.com
+// Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+// The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+bool isValidParentheses(string s)
+{
+    if (s == "")
+        return true;
+    stack<char> myStack;
+
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == ']' || s[i] == '}' || s[i] == ')')
+        {
+            if (s[i] == ']' && (myStack.empty() || myStack.top() != '['))
+                return false;
+            else if (s[i] == '}' && (myStack.empty() || myStack.top() != '{'))
+                return false;
+            else if (s[i] == ')' && (myStack.empty() || myStack.top() != '('))
+                return false;
+            else
+                myStack.pop();
+        }
+        else
+        {
+            myStack.push(s[i]);
+        }
+    }
+    return  myStack.empty();
+}
+
 int main()
 {
     // test twoSum
@@ -292,6 +322,10 @@ int main()
     ListNode<int>* res = removeNthFromEnd(linkedList, 2);
     cout << "removing second elemnt from 1->2->3 results in: ";
     Utils::PrintLinkedList(res);
+
+    // test isValidParentheses
+    cout << "()[]{} is: ";
+    isValidParentheses("()[]{}") ? cout << "valid parantheses approved" : cout << "not valid parantheses approved";
 
     // Kepp console waiting
     int i;
