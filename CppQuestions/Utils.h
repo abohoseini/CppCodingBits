@@ -4,13 +4,21 @@
 
 #include <vector>
 
-//Definition for singly-linked list.
+// Definition for singly-linked list.
 template <typename T>
 struct ListNode
 {
     T val;
     ListNode *next;
     ListNode(T x) : val(x), next(NULL) {}
+};
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
 class Utils
