@@ -113,18 +113,18 @@ Assume a BST is defined as follows:
     - Both the left and right subtrees must also be binary search trees.
 
 #### Example 1:
-
     2
    / \
   1   3
-
 Binary tree [2,1,3], return true.
 
 #### Example 2:
-
     1
    / \
   2   3
-
 Binary tree [1,2,3], return false.
+Refrerence: leetCode.com
+
+## Longest Common Prefix
+// Write a function to find the longest common prefix string amongst an array of strings.
 Refrerence: leetCode.com

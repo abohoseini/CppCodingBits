@@ -322,34 +322,68 @@ bool isValidBSTRec(TreeNode* root, TreeNode* minNode, TreeNode* maxNode)
     return isValidBSTRec(root->left, minNode, root) && isValidBSTRec(root->right, root, maxNode);
 }
 
-//Validate Binary Search Tree, reference: LeetCode.com
-//Given a binary tree, determine if it is a valid binary search tree(BST).
-//Assume a BST is defined as follows :
+// Validate Binary Search Tree, reference: LeetCode.com
+// Given a binary tree, determine if it is a valid binary search tree(BST).
+// Assume a BST is defined as follows :
 //  - The left subtree of a node contains only nodes with keys less than the node's key.
 //  - The right subtree of a node contains only nodes with keys greater than the node's key.
 //  - Both the left and right subtrees must also be binary search trees.
 //
-//Example 1:
+// Example 1:
 //
 //   2
 //  / \
 // 1   3
 //
-//Binary tree[2, 1, 3], return true.
+// Binary tree[2, 1, 3], return true.
 //
-//Example 2:
+// Example 2:
 //
 //   1
 //  / \
 // 2   3
 //
-//Binary tree[1, 2, 3], return false.
+// Binary tree[1, 2, 3], return false.
 bool isValidBST(TreeNode* root)
 {
     if (!root)
         return true;
 
     return isValidBSTRec(root, NULL, NULL);
+}
+
+string longestCommonPrefix(string l, string r)
+{
+    int minLen = min(l.length(), r.length());
+
+    for (int i = 0; i < minLen; i++)
+    {
+        if (l[i] != r[i])
+            return l.substr(0, i);
+    }
+    return l.substr(0, minLen);
+}
+
+string longestCommonPrefix(vector<string>& strs, int l, int r)
+{
+    if (l == r)
+        return strs[l];
+    int mid = (l + r) / 2;
+
+    string lcpLeft = longestCommonPrefix(strs, l, mid);
+    string lcpRight = longestCommonPrefix(strs, mid+1, r);
+
+    return longestCommonPrefix(lcpLeft, lcpRight);
+}
+
+// Longest Common Prefix, reference: LeetCode.com
+// Write a function to find the longest common prefix string amongst an array of strings.
+string longestCommonPrefix(vector<string>& strs)
+{
+    if (strs.size() == 0)
+        return "";
+
+    return longestCommonPrefix(strs, 0, strs.size() - 1);
 }
 
 int main()
@@ -411,6 +445,11 @@ int main()
     tree->right = new TreeNode(3);
     cout << "tree [1 2 3] is a ";
     isValidBST(tree) ? cout << "Valid BST" << endl : cout << "Invalid BST" << endl;
+
+    // Test longestCommonPrefix
+    vector<string> strs = { "abo", "ab", "abolfazl" };
+
+    cout << "Longest commen prefix for {abo, ab, abolfazl} is: " << longestCommonPrefix(strs).c_str() << endl;
 
     // Kepp console waiting
     int i;
