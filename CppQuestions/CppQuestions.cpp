@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "Utils.h"
+#include "Maze.h"
 
 //TwoSum, refrerence: leetCode.com
 // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -371,7 +372,7 @@ string longestCommonPrefix(vector<string>& strs, int l, int r)
     int mid = (l + r) / 2;
 
     string lcpLeft = longestCommonPrefix(strs, l, mid);
-    string lcpRight = longestCommonPrefix(strs, mid+1, r);
+    string lcpRight = longestCommonPrefix(strs, mid + 1, r);
 
     return longestCommonPrefix(lcpLeft, lcpRight);
 }
@@ -437,7 +438,7 @@ int main()
     ListNode<int>* secondList = new ListNode<int>(2);
     secondList->next = new ListNode<int>(4);
     cout << "merged sorted list of 1->3 and 2->4 is: ";
-    Utils::PrintLinkedList(MergeTwoLists(firstList,secondList));
+    Utils::PrintLinkedList(MergeTwoLists(firstList, secondList));
 
     // Test isValidBST
     TreeNode* tree = new TreeNode(2);
@@ -448,8 +449,24 @@ int main()
 
     // Test longestCommonPrefix
     vector<string> strs = { "abo", "ab", "abolfazl" };
-
     cout << "Longest commen prefix for {abo, ab, abolfazl} is: " << longestCommonPrefix(strs).c_str() << endl;
+
+    // Test Maze
+    //0 0 1 0 0
+    //0 0 0 0 0
+    //0 0 0 1 0
+    //1 1 0 1 1
+    //0 0 0 0 0
+
+    vector<vector<bool>> board1 = { { false, false, true, false, false },
+    { false, false, false, false, false },
+    { false, false, false, true, false },
+    { true, true, false, true, true },
+    { false, false, false, false, false } };
+
+    Maze maze(board1, coordinate{ 0,4 }, coordinate{ 4,4 });
+    if (maze.FindCheese())
+        maze.PrintBoardAndPath();
 
     // Kepp console waiting
     int i;

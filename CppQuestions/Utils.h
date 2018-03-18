@@ -21,6 +21,21 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+struct coordinate
+{
+    int ColNumber;
+    int RowNumber;
+
+    coordinate(int  rowNum, int colNum) : ColNumber(colNum), RowNumber(rowNum) {}
+    coordinate() = default;
+
+    inline bool operator == (const coordinate &b) const
+    {
+        return ((b.ColNumber == ColNumber) &&
+            (b.RowNumber == RowNumber));
+    }
+};
+
 class Utils
 {
 public:
