@@ -1,5 +1,6 @@
-# InterviewQuestions
-Some random inteview coding questions and answers in C++ and C#
+# Cpp Coding Bits
+Here I have gathered some random coding questions and my implementation in C++. 
+Please feel free to use them in any way you want. 
 
 ## Two Sum
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
