@@ -11,7 +11,7 @@ class Maze
 public:
     Maze(std::vector<std::vector<bool>>& board, coordinate mousePos, coordinate cheesePos);
     ~Maze();
-    bool FindCheese();
+    bool FindCheese(bool iter = true);
     void PrintBoardAndPath();
 
 private:
@@ -23,4 +23,5 @@ private:
     std::vector<std::vector<bool>> m_visited;
 
     bool FindCheeseRec(std::vector<std::vector<bool>>& visited, coordinate mousePosition);
+    bool FindCheeseIter();
 };

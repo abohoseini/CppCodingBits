@@ -1,6 +1,6 @@
-
-#include "Maze.h" ;
 #include <iostream>
+#include <stack>
+#include "Maze.h";
 
 Maze::Maze(std::vector<std::vector<bool>>& board, coordinate mousePos, coordinate cheesePos)
 {
@@ -11,7 +11,7 @@ Maze::Maze(std::vector<std::vector<bool>>& board, coordinate mousePos, coordinat
     m_board = board;
 }
 
-bool Maze::FindCheese()
+bool Maze::FindCheese(bool iter )
 {
     if (m_board[m_mousePosition.RowNumber][m_mousePosition.ColNumber] == true)
         return false;
@@ -28,7 +28,7 @@ bool Maze::FindCheese()
         }
     }
 
-    return FindCheeseRec(m_visited, m_mousePosition);
+    return (iter) ? FindCheeseIter() : FindCheeseRec(m_visited, m_mousePosition);
 }
 
 Maze::~Maze()
@@ -56,7 +56,6 @@ bool Maze::FindCheeseRec(std::vector<std::vector<bool>>& visited, coordinate mou
         FindCheeseRec(visited, coordinate{ mousePosition.RowNumber + 1, mousePosition.ColNumber }))
         return true;
 
-
     // Move Left
     if (mousePosition.ColNumber > 0 &&
         !m_board[mousePosition.RowNumber][mousePosition.ColNumber - 1] &&
@@ -72,6 +71,55 @@ bool Maze::FindCheeseRec(std::vector<std::vector<bool>>& visited, coordinate mou
         return true;
 
     visited[mousePosition.RowNumber][mousePosition.ColNumber] = false;
+    return false;
+}
+
+bool  Maze::FindCheeseIter()
+{
+    std::stack<coordinate> myStack;
+    myStack.push(m_mousePosition);
+
+    while (!myStack.empty())
+    {
+        // Pop a node from stack
+        auto currentNode = myStack.top();
+        myStack.pop();
+
+        if (!m_visited[currentNode.RowNumber][currentNode.ColNumber])
+        {
+            if (currentNode == m_cheesePosition)
+            {
+                return true;
+            }
+
+            m_visited[currentNode.RowNumber][currentNode.ColNumber] = true;
+        }
+
+        // Move UP
+        if (currentNode.RowNumber > 0 &&
+            !m_board[currentNode.RowNumber - 1][currentNode.ColNumber] &&
+            !m_visited[currentNode.RowNumber - 1][currentNode.ColNumber])
+            myStack.push(coordinate{ currentNode.RowNumber - 1, currentNode.ColNumber });
+
+        // Move Down
+        if (currentNode.RowNumber < m_rows - 1 &&
+            !m_board[currentNode.RowNumber + 1][currentNode.ColNumber] &&
+            !m_visited[currentNode.RowNumber + 1][currentNode.ColNumber])
+            myStack.push(coordinate{ currentNode.RowNumber + 1, currentNode.ColNumber });
+
+
+        // Move Left
+        if (currentNode.ColNumber > 0 &&
+            !m_board[currentNode.RowNumber][currentNode.ColNumber - 1] &&
+            !m_visited[currentNode.RowNumber][currentNode.ColNumber - 1])
+            myStack.push(coordinate{ currentNode.RowNumber, currentNode.ColNumber - 1 });
+
+        // Move Right
+        if (currentNode.ColNumber < m_cols - 1 &&
+            !m_board[currentNode.RowNumber][currentNode.ColNumber + 1] &&
+            !m_visited[currentNode.RowNumber][currentNode.ColNumber + 1])
+            myStack.push(coordinate{ currentNode.RowNumber, currentNode.ColNumber + 1 });
+    }
     return false;
 }
 
