@@ -113,15 +113,15 @@ Assume a BST is defined as follows:
     - Both the left and right subtrees must also be binary search trees.
 
 #### Example 1:
-|    2
-|   / \
-|  1   3
+  2
+ / \
+1   3
 Binary tree [2,1,3], return true.
 
 #### Example 2:
-|    1
-|   / \
-|  2   3
+  1
+ / \
+2   3
 Binary tree [1,2,3], return false.
 Refrerence: leetCode.com
 
@@ -132,3 +132,11 @@ Refrerence: leetCode.com
 ## The Maze
 Given a 2D vector of a maze, mouse position and cheese position, solve the maze.
 Both recursive and iterative solutions are implemented.
+
+## Minimum Meeting Rooms Number
+Given an arry of meeting tine intervals of start and end times [[s1,e1],[s2,e2][s3,e3],...] (si < ei),
+findd the minimum number of conference room required.
+
+#### for example,
+Given [[0, 30], [5, 10][15, 20]]
+return 2.

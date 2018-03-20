@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Utils.h"
 #include "Maze.h"
+#include "CppQuestions.h"
 
 //TwoSum, refrerence: leetCode.com
 // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -387,6 +388,41 @@ string longestCommonPrefix(vector<string>& strs)
     return longestCommonPrefix(strs, 0, strs.size() - 1);
 }
 
+struct Interval
+{
+    int start;
+    int end;
+    Interval(int s, int e) : start(s), end(e) {}
+};
+
+bool comparer(Interval a, Interval b) { return (a.start < b.start); }
+
+// Minimum Meeting Rooms Number
+// Given an arry of meeting tine intervals of start and end times [[s1,e1],[s2,e2][s3,e3],...] (si < ei),
+// findd the minimum number of conference room required.
+// for example,
+// Given [[0, 30], [5, 10][15, 20]]
+// return 2.
+int minMeetingRooms(vector<Interval>& intervals)
+{
+    if (intervals.size() ==0)
+        return 0;
+
+    std::sort(intervals.begin(), intervals.end(), comparer);
+
+    priority_queue<int,vector<int>, greater<int>> myQ;
+    myQ.push(intervals[0].end);
+
+    for (int i = 1; i < intervals.size(); i++)
+    {
+        if (intervals[i].start >= myQ.top())
+            myQ.pop();
+
+        myQ.push(intervals[i].end);
+    }
+    return myQ.size();
+}
+
 int main()
 {
     // Test twoSum
@@ -457,7 +493,6 @@ int main()
     //0 0 0 1 0
     //1 1 0 1 1
     //0 0 0 0 0
-
     vector<vector<bool>> board1 = { { false, false, true, false, false },
     { false, false, false, false, false },
     { false, false, false, true, false },
@@ -467,6 +502,10 @@ int main()
     Maze maze(board1, coordinate{ 0,4 }, coordinate{ 4,4 });
     if (maze.FindCheese())
         maze.PrintBoardAndPath();
+
+    // Test minMeetingRooms
+    vector<Interval> meetings = { Interval(0,30),Interval(5,10), Interval(15, 20) };
+    cout << "Minimum number of meeting rooms for meeting [0, 30], [5, 10][15, 20]] is: " << minMeetingRooms(meetings);
 
     // Kepp console waiting
     int i;
