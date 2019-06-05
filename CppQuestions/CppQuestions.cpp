@@ -3,7 +3,6 @@
 #include "stdafx.h"
 #include "Utils.h"
 #include "Maze.h"
-#include "CppQuestions.h"
 
 //TwoSum, refrerence: leetCode.com
 // Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -14,26 +13,19 @@
 // return[0, 1].
 vector<int> twoSum(vector<int>& nums, int target)
 {
-    vector<int> result(2);
-    map<int, int> myMap;
+    unordered_map<int, int> myMap;
 
     for (int i = 0; i < nums.size(); i++)
     {
+		int complement = target - nums[i];
+
+		auto iter = myMap.find(complement);
+		if (iter != myMap.end())
+			return { i, iter->second };
+
         myMap[nums[i]] = i;
     }
-
-    for (int j = 0; j < nums.size(); j++)
-    {
-        int complement = target - nums[j];
-
-        auto iter = myMap.find(complement);
-        if (iter != myMap.end() && iter->second != j)
-        {
-            result[0] = j;
-            result[1] = iter->second;
-        }
-    }
-    return result;
+	return {};
 }
 
 //Add Two Numbers, refrerence: leetCode.com
@@ -427,7 +419,7 @@ int main()
 {
     // Test twoSum
     vector<int> nums = { 2, 7, 11, 15 };
-    cout << "Sum of following two indices which is9 : ";
+    cout << "In following vecor: " << "{ 2, 7, 11, 15 }" << " Sum of following two indices is 9: ";
     Utils::PrintVector(twoSum(nums, 9));
 
     // Test addTwoNumbers
