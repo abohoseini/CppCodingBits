@@ -38,26 +38,30 @@ vector<int> twoSum(vector<int>& nums, int target)
 // Explanation : 342 + 465 = 807.
 ListNode<int>* addTwoNumbers(ListNode<int>* l1, ListNode<int>* l2)
 {
-    int carryOver = 0;
-    ListNode<int>* sum = new ListNode<int>(0);
-    ListNode<int>* num = sum;
+	int carryOver = 0;
+	ListNode<int>* sum = new ListNode<int>(0);
+	ListNode<int>* num = sum;
 
-    while (l1 || l2 || carryOver > 0)
-    {
-        int l1Val = (l1) ? l1->val : 0;
-        int l2Val = (l2) ? l2->val : 0;
-        int sumNum = l1Val + l2Val + carryOver;
-        carryOver = sumNum / 10;
-        num->next = new ListNode<int>(sumNum % 10);
-        num = num->next;
+	while (l1 || l2 || carryOver > 0)
+	{
+		int sumNum = carryOver;
+		if (l1)
+		{
+			sumNum += l1->val;
+			l1 = l1->next;
+		}
 
-        if (l1)
-            l1 = l1->next;
+		if (l2)
+		{
+			sumNum += l2->val;
+			l2 = l2->next;
+		}
 
-        if (l2)
-            l2 = l2->next;
-    }
-    return sum->next;
+		carryOver = sumNum / 10;
+		num->next = new ListNode<int>(sumNum % 10);
+		num = num->next;
+	}
+	return sum->next;
 }
 
 // Longest Substring Without Repeating Characters, Refrence: LeetCode.com
