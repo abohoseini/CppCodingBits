@@ -117,13 +117,16 @@ int reverse(int x)
     int result = 0;
     while (x)
     {
-        int temp = result * 10 + x % 10;
+		int popedNum = x % 10;
 
-        if (temp / 10 != result)
+        if (result > INT_MAX / 10
+			|| (result == INT_MAX/10 && popedNum > 7)
+			|| result < INT_MIN/10
+			|| (result == INT_MIN/10 && popedNum < -8))
             return 0;
 
         x /= 10;
-        result = temp;
+		result = result * 10 + popedNum;
     }
     return result;
 }
