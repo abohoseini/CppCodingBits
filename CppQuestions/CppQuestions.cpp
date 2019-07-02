@@ -4,8 +4,8 @@
 #include "Utils.h"
 #include "Maze.h"
 
-//TwoSum, refrerence: leetCode.com
-// Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+//TwoSum, reference: leetCode.com
+// Given an array of integers, return indexes of the two numbers such that they add up to a specific target.
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
 // Example:
 // Given nums = [2, 7, 11, 15], target = 9,
@@ -28,7 +28,7 @@ vector<int> twoSum(vector<int>& nums, int target)
 	return {};
 }
 
-//Add Two Numbers, refrerence: leetCode.com
+//Add Two Numbers, reference: leetCode.com
 // You are given two non - empty linked lists representing two non - negative integers.
 // The digits are stored in reverse order and each of their nodes contain a single digit.Add the two numbers and return it as a linked list.
 // You may assume the two numbers do not contain any leading zero, except the number 0 itself.
@@ -64,7 +64,7 @@ ListNode<int>* addTwoNumbers(ListNode<int>* l1, ListNode<int>* l2)
 	return sum->next;
 }
 
-// Longest Substring Without Repeating Characters, Refrence: LeetCode.com
+// Longest Substring Without Repeating Characters, reference: LeetCode.com
 // Given a string, find the length of the longest substring without repeating characters.
 // Examples:
 // Given "abcabcbb", the answer is "abc", which the length is 3.
@@ -97,7 +97,7 @@ int lengthOfLongestSubstring(string s)
     return ans;
 }
 
-// Reverse Integer, refrerence: leetCode.com
+// Reverse Integer, reference: leetCode.com
 // Given a 32 - bit signed integer, reverse digits of an integer.
 // Example 1:
 // Input: 123
@@ -131,7 +131,7 @@ int reverse(int x)
     return result;
 }
 
-// String to integer (atoi), refrence: LeetCode.com
+// String to integer (atoi), reference: LeetCode.com
 // Implement atoi to convert a string to an integer.
 //
 // Hint:
@@ -397,8 +397,8 @@ struct Interval
 bool comparer(Interval a, Interval b) { return (a.start < b.start); }
 
 // Minimum Meeting Rooms Number
-// Given an arry of meeting tine intervals of start and end times [[s1,e1],[s2,e2][s3,e3],...] (si < ei),
-// findd the minimum number of conference room required.
+// Given an array of meeting tine intervals of start and end times [[s1,e1],[s2,e2][s3,e3],...] (si < ei),
+// find the minimum number of conference room required.
 // for example,
 // Given [[0, 30], [5, 10][15, 20]]
 // return 2.
@@ -426,7 +426,7 @@ int main()
 {
     // Test twoSum
     vector<int> nums = { 2, 7, 11, 15 };
-    cout << "In following vecor: " << "{ 2, 7, 11, 15 }" << " Sum of following two indices is 9: ";
+    cout << "In following vector: " << "{ 2, 7, 11, 15 }" << " Sum of following two indexes is 9: ";
     Utils::PrintVector(twoSum(nums, 9));
 
     // Test addTwoNumbers
@@ -436,14 +436,14 @@ int main()
     ListNode<int>* secondNumber = new ListNode<int>(9);
     secondNumber->next = new ListNode<int>(3);
     auto result = addTwoNumbers(firstNumber, secondNumber);
-    cout << "15 + 39  stored in reverse order in linkedlist is: ";
+    cout << "15 + 39  stored in reverse order in linked-list is: ";
     Utils::PrintLinkedList(result);
 
     // Test lengthOfLongestSubstring
-    cout << "Lenth of longest substring of 'pwwkew' is: " << lengthOfLongestSubstring("pwwkew") << endl;
+    cout << "Length of longest substring of 'pwwkew' is: " << lengthOfLongestSubstring("pwwkew") << endl;
 
     // Test Reverse Integer
-    cout << "revrse of -234 is: " << reverse(-234) << endl;
+    cout << "reverse of -234 is: " << reverse(-234) << endl;
 
     // String to integer (atoi) test
     cout << "This is converted number for '  -000698xcd ' is: " << myAtoi("  -000698xcd ") << endl;
@@ -457,15 +457,15 @@ int main()
     linkedList->next = new ListNode<int>(2);
     linkedList->next->next = new ListNode<int>(3);
     ListNode<int>* res = removeNthFromEnd(linkedList, 2);
-    cout << "removing second elemnt from 1->2->3 results in: ";
+    cout << "removing second element from 1->2->3 results in: ";
     Utils::PrintLinkedList(res);
 
     // Test isValidParentheses
     cout << "()[]{} is: ";
     if (isValidParentheses("()[]{}"))
-        cout << "valid parantheses approved" << endl;
+        cout << "valid parentheses approved" << endl;
     else
-        cout << "not valid parantheses approved" << endl;
+        cout << "not valid parentheses approved" << endl;
 
     // Test MergeTwoLists
     ListNode<int>* firstList = new ListNode<int>(1);
@@ -484,7 +484,7 @@ int main()
 
     // Test longestCommonPrefix
     vector<string> strs = { "abo", "ab", "abolfazl" };
-    cout << "Longest commen prefix for {abo, ab, abolfazl} is: " << longestCommonPrefix(strs).c_str() << endl;
+    cout << "Longest common prefix for {abo, ab, abolfazl} is: " << longestCommonPrefix(strs).c_str() << endl;
 
     // Test Maze
     //0 0 1 0 0
@@ -506,7 +506,7 @@ int main()
     vector<Interval> meetings = { Interval(0,30),Interval(5,10), Interval(15, 20) };
     cout << "Minimum number of meeting rooms for meeting [0, 30], [5, 10][15, 20]] is: " << minMeetingRooms(meetings);
 
-    // Kepp console waiting
+    // Keep console waiting
     int i;
     cin >> i;
     return 0;
