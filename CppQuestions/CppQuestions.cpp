@@ -79,19 +79,17 @@ int lengthOfLongestSubstring(string s)
 
     int i = 0, j = 0, ans = 0;
     set<char> mySet;
-    while (i < len && j < len)
+    while (i < len)
     {
-        auto iter = mySet.find(s[j]);
+        auto iter = mySet.find(s[i]);
         if (iter == mySet.end())
         {
-            mySet.insert(s[j]);
-            j++;
-            ans = max(ans, j - i);
+            mySet.insert(s[i++]);
+            ans = max(ans, i - j);
         }
         else
         {
-            mySet.erase(s[i]);
-            i++;
+            mySet.erase(s[j++]);
         }
     }
     return ans;
