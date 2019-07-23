@@ -95,6 +95,65 @@ int lengthOfLongestSubstring(string s)
     return ans;
 }
 
+// Longest Palindromic Substring, reference: leetCode.com, solution is based on: https://www.geeksforgeeks.org/longest-palindromic-substring-set-2/
+// Given a string s, find the longest palindromic substring in s.You may assume that the maximum length of s is 1000.
+//
+// Example 1:
+// Input: "babad"
+// Output : "bab"
+// Note : "aba" is also a valid answer.
+//
+// Example 2 :
+// Input : "cbbd"
+// Output : "bb"
+string longestPalindrome(string s)
+{
+	int len = s.length();
+
+	if (len <= 1)
+		return s;
+
+	int maxLength = 1;
+	int start = 0;
+
+	for (int i = 1; i < len; i++)
+	{
+		int low = i - 1;
+		int high = i + 1;
+
+		while (low >= 0 && high < len && s[low] == s[high])
+		{
+			if (high - low + 1 > maxLength)
+			{
+				maxLength = high - low + 1;
+				start = low;
+			}
+
+			low--;
+			high++;
+		}
+	}
+
+	for (int i = 1; i < len; i++)
+	{
+		int low = i - 1;
+		int high = i;
+
+		while (low >= 0 && high < len && s[low] == s[high])
+		{
+			if (high - low + 1 > maxLength)
+			{
+				maxLength = high - low + 1;
+				start = low;
+			}
+			low--;
+			high++;
+		}
+	}
+
+	return s.substr(start, maxLength);
+}
+
 // Reverse Integer, reference: leetCode.com
 // Given a 32 - bit signed integer, reverse digits of an integer.
 // Example 1:
@@ -427,6 +486,8 @@ int main()
     cout << "In following vector: " << "{ 2, 7, 11, 15 }" << " Sum of following two indexes is 9: ";
     Utils::PrintVector(twoSum(nums, 9));
 
+	cout << endl;
+
     // Test addTwoNumbers
     // 15 + 39 = 54
     ListNode<int>* firstNumber = new ListNode<int>(5);
@@ -437,18 +498,33 @@ int main()
     cout << "15 + 39  stored in reverse order in linked-list is: ";
     Utils::PrintLinkedList(result);
 
+	cout << endl;
+
     // Test lengthOfLongestSubstring
     cout << "Length of longest substring of 'pwwkew' is: " << lengthOfLongestSubstring("pwwkew") << endl;
+
+	cout << endl;
+
+	// Test longestPalindrome
+	cout << "The longest palindromic substring of 'babad' is: " << longestPalindrome("babad") << endl;
+
+	cout << endl;
 
     // Test Reverse Integer
     cout << "reverse of -234 is: " << reverse(-234) << endl;
 
+	cout << endl;
+
     // String to integer (atoi) test
     cout << "This is converted number for '  -000698xcd ' is: " << myAtoi("  -000698xcd ") << endl;
+
+	cout << endl;
 
     // TestisPalindrome
     string palindromeOrNot = isPalindrome(1105011) ? "Palindrome" : "not Palindrome";
     cout << "Number 1105011 is: " << palindromeOrNot.c_str() << endl;
+
+	cout << endl;
 
     // Test removeNthFromEnd
     ListNode<int>* linkedList = new ListNode<int>(1);
@@ -458,12 +534,16 @@ int main()
     cout << "removing second element from 1->2->3 results in: ";
     Utils::PrintLinkedList(res);
 
+	cout << endl;
+
     // Test isValidParentheses
     cout << "()[]{} is: ";
     if (isValidParentheses("()[]{}"))
         cout << "valid parentheses approved" << endl;
     else
         cout << "not valid parentheses approved" << endl;
+
+	cout << endl;
 
     // Test MergeTwoLists
     ListNode<int>* firstList = new ListNode<int>(1);
@@ -473,6 +553,8 @@ int main()
     cout << "merged sorted list of 1->3 and 2->4 is: ";
     Utils::PrintLinkedList(MergeTwoLists(firstList, secondList));
 
+	cout << endl;
+
     // Test isValidBST
     TreeNode* tree = new TreeNode(2);
     tree->left = new TreeNode(1);
@@ -480,9 +562,13 @@ int main()
     cout << "tree [1 2 3] is a ";
     isValidBST(tree) ? cout << "Valid BST" << endl : cout << "Invalid BST" << endl;
 
+	cout << endl;
+
     // Test longestCommonPrefix
     vector<string> strs = { "abo", "ab", "abolfazl" };
     cout << "Longest common prefix for {abo, ab, abolfazl} is: " << longestCommonPrefix(strs).c_str() << endl;
+
+	cout << endl;
 
     // Test Maze
     //0 0 1 0 0
@@ -500,9 +586,11 @@ int main()
     if (maze.FindCheese())
         maze.PrintBoardAndPath();
 
+	cout << endl;
+
     // Test minMeetingRooms
     vector<Interval> meetings = { Interval(0,30),Interval(5,10), Interval(15, 20) };
-    cout << "Minimum number of meeting rooms for meeting [0, 30], [5, 10][15, 20]] is: " << minMeetingRooms(meetings);
+    cout << "Minimum number of meeting rooms for meeting [0, 30], [5, 10][15, 20]] is: " << minMeetingRooms(meetings) << endl;
 
     // Keep console waiting
     int i;
