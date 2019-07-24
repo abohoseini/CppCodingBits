@@ -283,7 +283,7 @@ int myAtoi(string str)
 
     int c = 0;
     int result = 0;
-    bool negative = false;
+    bool isNegative = false;
     int len = str.length();
 
     while (c < len  && str[c] == ' ')
@@ -294,7 +294,7 @@ int myAtoi(string str)
     if (c < len && (str[c] == '+' || str[c] == '-'))
     {
         if (str[c] == '-')
-            negative = true;
+            isNegative = true;
         c++;
     }
 
@@ -303,21 +303,26 @@ int myAtoi(string str)
         c++;
     }
 
-    while (c < len && str[c] >= '0' && str[c] <= '9')
-    {
-        int temp = (result * 10) + str[c] - '0';
+	while (c < len && str[c] >= '0' && str[c] <= '9')
+	{
 
-        if (temp / 10 == result)
-        {
-            result = temp;
-            c++;
-        }
-        else
-        {
-            return negative ? INT_MIN : INT_MAX;
-        }
-    }
-    return  negative ? result * -1 : result;
+		int pop = str[c] - '0';
+
+		if (isNegative)
+			pop *= -1;
+
+		//if pop is positive, result*10 + pop > INT_MAX -> overflow
+		if (pop >= 0 && result > (INT_MAX - pop) / 10)
+			return  INT_MAX;
+
+		//if pop is negative, result*10 + pop < INT_MIN -> overflow
+		if (pop <= 0 && result < (INT_MIN - pop) / 10)
+			return INT_MIN;
+
+		result = (result * 10) + pop;
+		c++;
+	}
+    return  result;
 }
 
 // Palindrome Number, reference: LeetCode.com
