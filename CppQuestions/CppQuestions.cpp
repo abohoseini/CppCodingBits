@@ -238,11 +238,11 @@ int reverse(int x)
 		int popedNum = x % 10;
 
 		// for positive numbers, result * 10 + popedNumber > INT_MAX;
-		if (popedNum > 0 && result > (INT_MAX - popedNum) / 10)
+		if (popedNum >= 0 && result > (INT_MAX - popedNum) / 10)
 			return 0;
 
 		// for negative numbers, result * 10 + popedNumber < INT_MIN;
-		if (popedNum < 0 && result < (INT_MIN - popedNum) / 10)
+		if (popedNum <= 0 && result < (INT_MIN - popedNum) / 10)
 			return 0;
 
         x /= 10;
