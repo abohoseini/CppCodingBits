@@ -4,6 +4,7 @@
 #include "Utils.h"
 #include "Maze.h"
 
+
 //TwoSum, reference: leetCode.com
 // Given an array of integers, return indexes of the two numbers such that they add up to a specific target.
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -93,6 +94,66 @@ int lengthOfLongestSubstring(string s)
         }
     }
     return ans;
+}
+
+//Median of Two Sorted Arrays, reference: leetCode.com, solution is based on: https://youtu.be/LPFhl65R7ww
+//There are two sorted arrays nums1 and nums2 of size m and n respectively.
+//Find the median of the two sorted arrays.The overall run time complexity should be O(log(m + n)).
+//You may assume nums1 and nums2 cannot be both empty.
+//
+//Example 1:
+//nums1 = [1, 3]
+//nums2 = [2]
+//The median is 2.0
+//
+//Example 2:
+//nums1 = [1, 2]
+//nums2 = [3, 4]
+//The median is(2 + 3) / 2 = 2.5
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) 
+{
+	// we want to do the binary search on the smaller array to save some time.
+	if (nums1.size() > nums2.size())
+		return findMedianSortedArrays(nums2, nums1);
+
+	int x = nums1.size();
+	int y = nums2.size();
+	int low = 0;
+	int high = x;
+
+	while (low <= high)
+	{
+		int partitionX = (low + high) / 2;
+
+		// partitionY + partitionX =(x+y+1)/2);
+		int partitionY = ((x + y + 1) / 2) - partitionX;
+
+		int maxLeftOfPartitionX = (partitionX == 0) ? INT_MIN : nums1[partitionX - 1];
+		int minRightOfPartitionX = (partitionX == x) ? INT_MAX : nums1[partitionX];
+		int maxLeftOfPartitionY = (partitionY == 0) ? INT_MIN : nums2[partitionY - 1];
+		int minRightOfPartitionY = (partitionY == y) ? INT_MAX : nums2[partitionY];
+
+		if (maxLeftOfPartitionX <= minRightOfPartitionY && maxLeftOfPartitionY <= minRightOfPartitionX)
+		{
+			if ((x + y) % 2 == 0)
+				return  ((double)max(maxLeftOfPartitionX, maxLeftOfPartitionY) + min(minRightOfPartitionX, minRightOfPartitionY)) / 2;
+			else
+				return max(maxLeftOfPartitionX, maxLeftOfPartitionY);
+
+		}
+		else if (maxLeftOfPartitionX > minRightOfPartitionY)
+		{
+			// positionX should move further left
+			high = partitionX - 1;
+		}
+		else
+		{
+			// positionX should move further right
+			low = partitionX + 1;
+		}
+	}
+
+	return INT_MIN;
 }
 
 // Longest Palindromic Substring, reference: leetCode.com, solution is based on: https://www.geeksforgeeks.org/longest-palindromic-substring-set-2/
@@ -502,6 +563,13 @@ int main()
 
     // Test lengthOfLongestSubstring
     cout << "Length of longest substring of 'pwwkew' is: " << lengthOfLongestSubstring("pwwkew") << endl;
+
+	cout << endl;
+
+	// Test longestPalindrome
+	vector<int> nums1 = { 1 , 2 };
+	vector<int> nums2 = { 3 , 4 };
+	cout << "median of following sorted arrays of " << Utils::VectorToString<int>(nums1) << " and " << Utils::VectorToString<int>(nums2) << " is: " << findMedianSortedArrays(nums1, nums2) << endl;
 
 	cout << endl;
 

@@ -3,6 +3,7 @@
 #define UTILS_H
 
 #include <vector>
+#include <string>
 
 // Definition for singly-linked list.
 template <typename T>
@@ -47,6 +48,9 @@ public:
 
   template <typename T>
   static void Swap(T &a, T &b);
+
+  template <typename T>
+  static std::string VectorToString(std::vector<T> vect);
 };
 
 #endif // UTILS_H

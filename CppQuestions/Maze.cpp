@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stack>
-#include "Maze.h";
+#include "Maze.h"
 
 Maze::Maze(std::vector<std::vector<bool>>& board, coordinate mousePos, coordinate cheesePos)
 {

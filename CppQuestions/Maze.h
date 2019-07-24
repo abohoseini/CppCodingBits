@@ -2,7 +2,7 @@
 // Given a 2d vector Maze, mouse position and cheese position, solve maze.
 #pragma once
 
-#include "Utils.h" ;
+#include "Utils.h"
 #include <vector>
 
 class Maze
