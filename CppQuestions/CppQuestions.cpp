@@ -343,6 +343,37 @@ bool isPalindrome(int x)
     return (x == revX || x == revX / 10);
 }
 
+
+//Container With Most Water, reference: leetcode.com
+//
+//Given n non - negative integers a1, a2, ..., an, where each represents a point at coordinate(i, ai).n vertical lines are drawn such that the two endpoints of line i is at(i, ai) and (i, 0).
+//Find two lines, which together with x - axis forms a container, such that the container contains the most water.
+//
+//Note: You may not slant the container and n is at least 2.
+//
+//Example:
+//Input: [1, 8, 6, 2, 5, 4, 8, 3, 7]
+//Output : 49
+int maxArea(vector<int>& height) {
+
+	int maxA = 0;
+	int i = 0;
+	int j = height.size() - 1;
+
+
+	while (j - i > 0) {
+		// or you can say while (i < j )    
+		maxA = max(maxA, (min(height[i], height[j]) * (j - i)));
+
+		if (height[i] < height[j])
+			i++;
+		else
+			j--;
+	}
+	return maxA;
+}
+
+
 // Remove Nth Node From End of List, reference: LeetCode.com
 // Given a linked list, remove the nth node from the end of list and return its head.
 //
@@ -576,7 +607,7 @@ int main()
 	// Test longestPalindrome
 	vector<int> nums1 = { 1 , 2 };
 	vector<int> nums2 = { 3 , 4 };
-	cout << "median of following sorted arrays of " << Utils::VectorToString<int>(nums1) << " and " << Utils::VectorToString<int>(nums2) << " is: " << findMedianSortedArrays(nums1, nums2) << endl;
+	cout << " The Median of following sorted arrays of " << Utils::VectorToString<int>(nums1) << " and " << Utils::VectorToString<int>(nums2) << " is: " << findMedianSortedArrays(nums1, nums2) << endl;
 
 	cout << endl;
 
@@ -596,8 +627,16 @@ int main()
 	cout << endl;
 
     // TestisPalindrome
-    string palindromeOrNot = isPalindrome(1105011) ? "Palindrome" : "not Palindrome";
-    cout << "Number 1105011 is: " << palindromeOrNot.c_str() << endl;
+	int num = 1105011;
+    string palindromeOrNot = isPalindrome(num) ? "Palindrome" : "not Palindrome";
+    cout << "Number " << num << " is:  " << palindromeOrNot.c_str() << endl;
+
+	cout << endl;
+
+	// Test longestPalindrome
+	vector<int> Heights = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
+
+	cout << "The max area occupied between following heights in order: " << Utils::VectorToString<int>(Heights) << " is: " << maxArea(Heights) << endl;
 
 	cout << endl;
 
