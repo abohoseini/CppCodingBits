@@ -343,6 +343,62 @@ bool isPalindrome(int x)
     return (x == revX || x == revX / 10);
 }
 
+// Regular Expression Matching, reference: LeetCode.com
+//Given an input string(s) and a pattern(p), implement regular expression matching with support for '.'and '*'.
+//
+//'.' Matches any single character.
+//'*' Matches zero or more of the preceding element.
+//The matching should cover the entire input string(not partial).
+//
+//Note:
+//s could be emptyand contains only lowercase letters a - z.
+//p could be emptyand contains only lowercase letters a - z, and characters like . or *.
+//
+//Example 1 :
+//Input :
+//s = "aa"
+//p = "a"
+//Output : false
+//Explanation : "a" does not match the entire string "aa".
+//
+//Example 2 :
+//Input :
+//s = "aa"
+//p = "a*"
+//Output : true
+//Explanation : '*' means zero or more of the preceding element, 'a'.Therefore, by repeating 'a' once, it becomes "aa".
+//
+//Example 3 :
+//Input :
+//s = "ab"
+//p = ".*"
+//Output : true
+//Explanation : ".*" means "zero or more (*) of any character (.)".
+//
+//Example 4 :
+//Input :
+//s = "aab"
+//p = "c*a*b"
+//Output : true
+//Explanation : c can be repeated 0 times, a can be repeated 1 time.Therefore, it matches "aab".
+//
+//Example 5 :
+//Input :
+//s = "mississippi"
+//p = "mis*is*p*."
+//Output : false
+bool isMatch(string s, string p)
+{
+	if (p.length() == 0)
+		return s.length() == 0;
+
+	bool firstMatch = (s.length() > 0) && (s[0] == p[0] || p[0] == '.');
+
+	if (p.length() >= 2 && p[1] == '*')
+		return isMatch(s, p.substr(2)) || (firstMatch && s.length() > 0 && isMatch(s.substr(1), p));
+	else
+		return firstMatch && s.length() > 0 && isMatch(s.substr(1), p.substr(1));
+}
 
 //Container With Most Water, reference: leetcode.com
 //
@@ -372,7 +428,6 @@ int maxArea(vector<int>& height) {
 	}
 	return maxA;
 }
-
 
 // Remove Nth Node From End of List, reference: LeetCode.com
 // Given a linked list, remove the nth node from the end of list and return its head.
@@ -604,7 +659,7 @@ int main()
 
 	cout << endl;
 
-	// Test longestPalindrome
+	// Test findMedianSortedArrays
 	vector<int> nums1 = { 1 , 2 };
 	vector<int> nums2 = { 3 , 4 };
 	cout << " The Median of following sorted arrays of " << Utils::VectorToString<int>(nums1) << " and " << Utils::VectorToString<int>(nums2) << " is: " << findMedianSortedArrays(nums1, nums2) << endl;
@@ -626,14 +681,23 @@ int main()
 
 	cout << endl;
 
-    // TestisPalindrome
+    // Test isPalindrome
 	int num = 1105011;
     string palindromeOrNot = isPalindrome(num) ? "Palindrome" : "not Palindrome";
     cout << "Number " << num << " is:  " << palindromeOrNot.c_str() << endl;
 
 	cout << endl;
 
-	// Test longestPalindrome
+	//Test isMatch
+	string s = "mississippi";
+	string p = "mis*is*p*.";
+
+	string matches = isMatch(s, p) ? " matches" : " doesn't match"; 
+	cout << "The sting: " << s << matches<< " the string: "<< p << endl;
+
+	cout << endl;
+
+	// Test maxArea
 	vector<int> Heights = { 1, 8, 6, 2, 5, 4, 8, 3, 7 };
 
 	cout << "The max area occupied between following heights in order: " << Utils::VectorToString<int>(Heights) << " is: " << maxArea(Heights) << endl;
